@@ -27,9 +27,7 @@ jobs:
       run: |
         cd src/tools/.libs/
         tar czf hunspell-linux-x64.tar.gz *
-    - name: Upload hunspell-linux-x64.tar.gz
-        uses: actions/upload-artifact@v2
-        with:
-          name: hunspell-linux-x64.tar.gz
-          path: src/tools/.libs/hunspell-linux-x64.tar.gz
-          
+    - uses: actions/upload-artifact@v2
+      with:
+        name: hunspell-linux-x64.tar.gz
+        path: src/tools/.libs/hunspell-linux-x64.tar.gz
