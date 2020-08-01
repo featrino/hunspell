@@ -30,6 +30,6 @@ jobs:
     - name: Upload hunspell-linux-x64.tar.gz
         uses: actions/upload-artifact@v2
         with:
-          name: homework
+          name: hunspell-linux-x64.tar.gz
           path: src/tools/.libs/hunspell-linux-x64.tar.gz
           
