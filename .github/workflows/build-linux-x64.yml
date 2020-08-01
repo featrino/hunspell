@@ -7,8 +7,8 @@ on:
     branches: [ master ]
 
 jobs:
-  
-  build-ubunut:
+
+  build-ubuntu:
 
     runs-on: ubuntu-latest
 
@@ -59,3 +59,13 @@ jobs:
       with:
         name: hunspell-macos-x64.tar.gz
         path: src/tools/.libs/hunspell-macos-x64.tar.gz
+
+  build-windows:
+
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: msys2/setup-msys2@v2
+    - shell: msys2 {0}
+      run: |
+        sudo apt install g++ make autoconf automake autopoint libtool
