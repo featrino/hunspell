@@ -13,7 +13,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: install deb deps
+    - name: apt install
       run: sudo apt install g++ make autoconf automake autopoint libtool
     - name: autoreconf
       run: autoreconf -vfi
@@ -31,3 +31,30 @@ jobs:
       with:
         name: hunspell-linux-x64.tar.gz
         path: src/tools/.libs/hunspell-linux-x64.tar.gz
+
+  build:
+
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: brew install
+      run: brew install autoconf automake libtool gettext
+    - name: brew link
+      run: brew link gettext --force
+    - name: autoreconf
+      run: autoreconf -vfi
+    - name: configure
+      run: ./configure
+    - name: make
+      run: make
+    - name: make check
+      run: make check
+    - name: package
+      run: |
+        cd src/tools/.libs/
+        tar czf hunspell-macos-x64.tar.gz *
+    - uses: actions/upload-artifact@v2
+      with:
+        name: hunspell-macos-x64.tar.gz
+        path: src/tools/.libs/hunspell-macos-x64.tar.gz
