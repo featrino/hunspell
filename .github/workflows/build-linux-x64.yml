@@ -66,9 +66,25 @@ jobs:
     steps:
     - uses: msys2/setup-msys2@v2
     - uses: actions/checkout@v2
-    - shell: msys2 {0}
+    - name: pacman install
+      shell: msys2 {0}
       run: pacman --sync --noconfirm base-devel mingw-w64-x86_64-toolchain mingw-w64-x86_64-libtool
-    - shell: msys2 {0}
+    - name: autoreconf
+      shell: msys2 {0}
       run: autoreconf -vfi
-    - shell: msys2 {0}
+    - name: configure
+      shell: msys2 {0}
       run: ./configure
+    - shell: msys2 {0}
+      run: make
+    - shell: msys2 {0}
+      run: make check
+    - name: package
+      shell: msys2 {0}
+      run: |
+        cd src/tools/.libs/
+        tar czf hunspell-windows-x64.tar.gz *
+    - uses: actions/upload-artifact@v2
+      with:
+        name: hunspell-windows-x64.tar.gz
+        path: src/tools/.libs/hunspell-windows-x64.tar.gz
