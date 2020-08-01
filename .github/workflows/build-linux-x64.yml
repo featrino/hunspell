@@ -66,8 +66,6 @@ jobs:
     steps:
     - uses: msys2/setup-msys2@v2
     - uses: actions/checkout@v2
-    - name: pacman install
-      run: pacman -S base-devel mingw-w64-x86_64-toolchain mingw-w64-x86_64-libtool
     - shell: msys2 {0}
       run: |
         autoreconf -vfi
