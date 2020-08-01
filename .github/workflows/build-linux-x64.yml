@@ -64,8 +64,13 @@ jobs:
 
     runs-on: windows-latest
     steps:
-    - uses: actions/checkout@v2
     - uses: msys2/setup-msys2@v2
+    - uses: actions/checkout@v2
+    - name: pacman install
+      run: pacman -S base-devel mingw-w64-x86_64-toolchain mingw-w64-x86_64-libtool
     - shell: msys2 {0}
       run: |
-        sudo apt install g++ make autoconf automake autopoint libtool
+        autoreconf -vfi
+    - shell: msys2 {0}
+      run: |
+        ./configure
