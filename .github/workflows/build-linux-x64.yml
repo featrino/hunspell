@@ -68,7 +68,7 @@ jobs:
     - uses: actions/checkout@v2
     - name: pacman install
       shell: msys2 {0}
-      run: pacman --sync --noconfirm base-devel mingw-w64-x86_64-toolchain mingw-w64-x86_64-libtool
+      run: pacman --sync --noconfirm base-devel autoconf-wrapper mingw-w64-x86_64-toolchain mingw-w64-x86_64-libtool
     - name: autoreconf
       shell: msys2 {0}
       run: autoreconf -vfi
